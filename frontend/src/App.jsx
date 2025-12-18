@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import EventsTable from "./components/EventsTable";
+import EventsForm from "./components/EventsForm";
 
 function App() {
   const [events, setEvents] = useState([
@@ -25,11 +26,16 @@ function App() {
       description: "Ask questions and get guidance from Speakers",
     },
   ]);
-
+  function addEvent(newEvent) {
+    setEvents([...events, newEvent]);
+  }
+  
   return (
     <div>
       <h1>CS Club Dashboard</h1>
       <h2>Events</h2>
+      
+      <EventsForm addEvent={addEvent} />
       <EventsTable events={events} />
     </div>
   );
