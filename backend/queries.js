@@ -1,28 +1,21 @@
-/*const dotenv = require('dotenv');
-dotenv.config();
 
-const { Pool } = require('pg');
-
-
-const pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
-  });*/
   const { Pool } = require('pg');
+  
 
-
+  console.log("Loaded queries.js with direct Pool config");
 const pool = new Pool({
   user: 'postgres',      
   host: 'localhost',
-  database: 'csclub',    
-  password: 'password',   
+  database: 'csclub',   
+  password: 'password', 
   port: 5432,
 });
 
-  
-
+// GET events
 const getEvents = (req, res) => {
   pool.query('SELECT * FROM events ORDER BY id ASC', (error, results) => {
     if (error) {
+      console.error('Error fetching events:', error);
       res.status(500).json({ error: error.message });
       return;
     }
@@ -30,6 +23,7 @@ const getEvents = (req, res) => {
   });
 };
 
+// POST events
 const createEvent = (req, res) => {
   const { title, date, location, description } = req.body;
 
@@ -38,6 +32,7 @@ const createEvent = (req, res) => {
     [title, date, location, description],
     (error, results) => {
       if (error) {
+        console.error('Error creating event:', error);
         res.status(500).json({ error: error.message });
         return;
       }
