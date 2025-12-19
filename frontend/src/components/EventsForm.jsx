@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function AddEventForm({ addEvent }) {
+function EventsForm({ addEvent }) {
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
   const [location, setLocation] = useState("");
@@ -10,7 +10,6 @@ function AddEventForm({ addEvent }) {
     e.preventDefault();
 
     const newEvent = {
-      id: Date.now(), 
       title,
       date,
       location,
@@ -19,7 +18,7 @@ function AddEventForm({ addEvent }) {
 
     addEvent(newEvent); 
 
-    // clear form
+    // clear the form
     setTitle("");
     setDate("");
     setLocation("");
@@ -28,7 +27,7 @@ function AddEventForm({ addEvent }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h2>Add New Event</h2>
+      <h3>Add New Event</h3>
 
       <input
         placeholder="Title"
@@ -38,7 +37,6 @@ function AddEventForm({ addEvent }) {
 
       <input
         placeholder="Date"
-        type="date"
         value={date}
         onChange={(e) => setDate(e.target.value)}
       />
@@ -53,7 +51,6 @@ function AddEventForm({ addEvent }) {
         placeholder="Description"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
-       
       />
 
       <button type="submit">Add Event</button>
@@ -61,4 +58,4 @@ function AddEventForm({ addEvent }) {
   );
 }
 
-export default AddEventForm;
+export default EventsForm;
